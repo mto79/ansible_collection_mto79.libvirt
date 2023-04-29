@@ -1,0 +1,23 @@
+---
+- name: "Setup | Installing KVM Packages"
+  ansible.builtin.dnf:
+    name: "{{ libvirt_install_kvm_packages }}"
+    state: present
+
+- name: "Setup | Enable and Start libvirtd"
+  ansible.builtin.systemd:
+    name: libvirtd
+    state: started
+    enabled: yes
+
+- name: "Setup | Restart libvirtd"
+  ansible.builtin.systemd:
+    name: libvirtd
+    state: restarted
+
+- name: "Setup | Verify KVM module is loaded"
+  ansible.builtin.shell: "set -o pipefail && lsmod | grep -i kvm"
+  register: _libvirt_install_kvm_module_result
+  failed_when: "_libvirt_install_kvm_module_result.rc != 0"
+
+...
