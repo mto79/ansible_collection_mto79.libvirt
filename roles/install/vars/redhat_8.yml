@@ -1,5 +1,5 @@
 ---
-libvirt_install_kvm_packages:
+libvirt_install_setup_kvm_packages:
   - "@virtualization-hypervisor"
   - "@virtualization-client"
   - "@virtualization-platform"
