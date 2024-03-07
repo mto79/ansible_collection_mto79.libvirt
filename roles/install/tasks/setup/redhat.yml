@@ -31,7 +31,6 @@
   when: "_libvirt_install_setup_kvm_module_result.rc != 0"
 
 - name: "Setup | Configure firewall for Libvirt"
-  become: true
   ansible.builtin.include_tasks: "redhat/configure_firewall.yml"
   when: "libvirt_install_setup_firewall_services is defined"
 
