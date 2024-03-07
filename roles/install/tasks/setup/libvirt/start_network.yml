@@ -1,0 +1,27 @@
+---
+- name: "Setup | Network | Define network {{ libvirt_install_setup_network_name }}"
+  community.libvirt.virt_net:
+    uri: "{{ libvirt_install_setup_uri }}"
+    command: "define"
+    name: "{{ libvirt_install_setup_network_name }}"
+    xml: "{{ lookup('template', 'templates/network.xml.j2') }}"
+
+- name: "Setup | Network | Active network {{ libvirt_install_setup_network_name }}"
+  community.libvirt.virt_net:
+    uri: "{{ libvirt_install_setup_uri }}"
+    command: "active"
+    name: "{{ libvirt_install_network_name }}"
+
+- name: "Setup | Network | Activate autostart network {{ libvirt_install_setup_network_name }}"
+  community.libvirt.virt_net:
+    uri: "{{ libvirt_install_setup_uri }}"
+    autostart: true
+    name: "{{ libvirt_install_setup_network_name }}"
+
+- name: "Setup | Network | Disable autostart for a given pool {{ libvirt_install_setup_network_name }}"
+  community.libvirt.virt_pool:
+    uri: "{{ libvirt_install_setup_uri }}"
+    autostart: "{{ libvirt_install_setup_network_autostart | d(false) }}"
+    name: "{{ libvirt_install_setup_network_name }}"
+
+...

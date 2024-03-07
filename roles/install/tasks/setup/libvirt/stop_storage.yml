@@ -1,0 +1,17 @@
+---
+- name: "Setup | Storage | Stop storagepool {{ libvirt_install_setup_storage_pool }}"
+  community.libvirt.virt_pool:
+    command: "destroy"
+    name: "{{ libvirt_install_setup_storage_pool }}"
+   
+- name: "Setup | Storage | Delete a storagepool {{ libvirt_install_setup_storage_pool }}"
+  community.libvirt.virt_pool:
+    command: "delete"
+    name: "{{ libvirt_install_setup_storage_pool }}"
+
+- name: "Setup | Storage | Undefine storagepool {{ libvirt_install_setup_storage_pool }}"
+  community.libvirt.virt_pool:
+    command: "undefine"
+    name: "{{ libvirt_install_setup_storage_pool }}"
+
+...

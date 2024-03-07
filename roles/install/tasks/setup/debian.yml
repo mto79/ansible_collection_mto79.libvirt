@@ -1,0 +1,19 @@
+---
+- name: "Setup | Installing KVM Packages"
+  become: true
+  ansible.builtin.apt:
+    name: "{{ libvirt_install_setup_kvm_packages }}"
+    state: "present"
+
+- name: "Setup | Enable and Start libvirtd"
+  become: true
+  ansible.builtin.systemd:
+    name: "libvirtd"
+    state: "started"
+    enabled: true
+
+- name: "Setup | Configure firewall for Libvirt"
+  ansible.builtin.include_tasks: "redhat/configure_firewall.yml"
+  when: "libvirt_install_setup_firewall_services is defined"
+
+...

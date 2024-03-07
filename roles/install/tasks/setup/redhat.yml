@@ -1,23 +1,37 @@
 ---
 - name: "Setup | Installing KVM Packages"
+  become: true
   ansible.builtin.dnf:
     name: "{{ libvirt_install_setup_kvm_packages }}"
-    state: present
+    state: "present"
 
 - name: "Setup | Enable and Start libvirtd"
+  become: true
   ansible.builtin.systemd:
     name: "libvirtd"
     state: "started"
-    enabled: true``
+    enabled: true
 
 - name: "Setup | Restart libvirtd"
+  become: true
   ansible.builtin.systemd:
     name: "libvirtd"
     state: "restarted"
 
 - name: "Setup | Verify KVM module is loaded"
+  become: true
   ansible.builtin.shell: "set -o pipefail && lsmod | grep -i kvm"
-  register: _libvirt_install_setup_kvm_module_result
+  register: "_libvirt_install_setup_kvm_module_result"
   failed_when: "_libvirt_install_setup_kvm_module_result.rc != 0"
+  changed_when: false 
+
+- name: "Setup | Verify KVM module is loaded | Fail"
+  ansible.builtin.fail:
+    msg: "KVM module is not loaded"
+  when: "_libvirt_install_setup_kvm_module_result.rc != 0"
+
+- name: "Setup | Configure firewall for Libvirt"
+  ansible.builtin.include_tasks: "redhat/configure_firewall.yml"
+  when: "libvirt_install_setup_firewall_services is defined"
 
 ...

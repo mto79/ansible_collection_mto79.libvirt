@@ -1,0 +1,17 @@
+---
+- name: "Setup | Network | Get XML {{ libvirt_install_setup_network_name }}"
+  community.libvirt.virt_net:
+    state: "get_xml"
+    name: "{{ libvirt_install_network_name }}"
+
+- name: "Setup | Network | Stop network {{ libvirt_install_setup_network_name }}"
+  community.libvirt.virt_net:
+    state: "destroy"
+    name: "{{ libvirt_install_network_name }}"
+
+- name: "Setup | Network | Undefine network {{ libvirt_install_setup_network_name }}"
+  community.libvirt.virt_net:
+    state: "undefine"
+    name: "{{ libvirt_install_network_name }}"
+
+...

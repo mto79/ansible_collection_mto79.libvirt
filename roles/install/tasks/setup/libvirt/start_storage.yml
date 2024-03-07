@@ -1,0 +1,24 @@
+---
+- name: "Setup | Storage | Define storagepool {{ libvirt_install_setup_storage_pool }}"
+  community.libvirt.virt_pool:
+    uri: "{{ libvirt_install_setup_uri }}"
+    command: "define"
+    name: "{{ libvirt_install_setup_storage_pool }}"
+    xml: "{{ lookup('template', 'templates/setup/storagepool.xml.j2') }}"
+
+- name: "Setup | Storage | Build storagepool {{ libvirt_install_setup_storage_pool }}"
+  community.libvirt.virt_pool:
+    uri: "{{ libvirt_install_setup_uri }}"
+    command: "build"
+    name: "{{ libvirt_install_setup_storage_pool }}"
+
+- name: "Setup | Storage | Start storagepool {{ libvirt_install_setup_storage_pool }}"
+  community.libvirt.virt_pool:
+    uri: "{{ libvirt_install_setup_uri }}"
+    command: "create"
+    name: "{{ libvirt_install_setup_storage_pool }}"
+
+
+
+
+...

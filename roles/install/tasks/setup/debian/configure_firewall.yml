@@ -1,0 +1,19 @@
+---
+- name: "Setup | Firewall | Configure firewall for Libvirt"
+  become: true
+  block:
+
+    - name: "Setup | Firewall | Include mto79 firewall role"
+      ansible.builtin.include_role:
+        name: "mto79.system.firewall"
+      vars:
+        __role_action: "setup"
+        system_firewall_setup_services: "{{ libvirt_install_setup_firewall_services | d([]) }}"
+
+  rescue:
+
+    - name: "Setup | Firewall | Handle errors"
+      ansible.builtin.fail:
+        msg: "Include mto79.system.firewall role failed"
+
+...

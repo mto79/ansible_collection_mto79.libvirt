@@ -1,0 +1,11 @@
+---
+libvirt_install_setup_kvm_packages:
+  - "libvirt-daemon"
+  - "libvirt-daemon-system"
+  - "libvirt-clients"
+  - "qemu-kvm"
+  - "qemu-utils"
+  - "mkisofs"
+  - "dnsmasq"
+
+...
