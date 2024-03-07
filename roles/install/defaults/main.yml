@@ -1,5 +1,6 @@
 ---
 libvirt_install_setup_uri: "qemu:///system"
+libvirt_install_setup_users: []
 libvirt_install_setup_network_autostart: true
 
 ...
