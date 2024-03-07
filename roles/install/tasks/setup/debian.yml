@@ -16,4 +16,13 @@
   ansible.builtin.include_tasks: "redhat/configure_firewall.yml"
   when: "libvirt_install_setup_firewall_services is defined"
 
+- name: "Setup | Add existing user to libvirt group"
+  become: true
+  ansible.builtin.user:
+    name: "{{ item }}"
+    groups: "libvirt"
+    append: "yes"
+  loop: "{{ libvirt_install_setup_users }}"
+  when: "libvirt_install_setup_users is defined"
+
 ...
