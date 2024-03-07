@@ -10,7 +10,7 @@
   ansible.builtin.systemd:
     name: "libvirtd"
     state: "started"
-    enabled: true
+    enabled: "yes"
 
 - name: "Setup | Restart libvirtd"
   become: true
